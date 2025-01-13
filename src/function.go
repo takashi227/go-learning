@@ -33,6 +33,11 @@ func ReturnFunc() func() {
 	}
 }
 
+// 関数を引数に取る関数
+func CallFunction(f func()) {
+	f()
+}
+
 func main() {
 	var i int = Plus(1, 2)
 	fmt.Println(i)
@@ -63,4 +68,8 @@ func main() {
 
 	f2 := ReturnFunc()
 	f2()
+
+	CallFunction(func() {
+		fmt.Println("I'm a function")
+	})
 }

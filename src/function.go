@@ -26,6 +26,13 @@ func NoReturn() {
 	fmt.Println("No return")
 }
 
+// 関数を返す関数
+func ReturnFunc() func() {
+	return func() {
+		fmt.Println("I'm a function")
+	}
+}
+
 func main() {
 	var i int = Plus(1, 2)
 	fmt.Println(i)
@@ -40,4 +47,20 @@ func main() {
 	fmt.Println(Double(100))
 
 	NoReturn()
+
+	// 無名関数
+	f := func(x, y int) int {
+		return x + y
+	}
+	i2 := f(1, 2)
+	fmt.Println(i2)
+
+	// 即時関数
+	i3 := func(x, y int) int {
+		return x + y
+	}(1, 2)
+	fmt.Println(i3)
+
+	f2 := ReturnFunc()
+	f2()
 }

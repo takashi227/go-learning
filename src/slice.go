@@ -36,4 +36,33 @@ func main() {
 	fmt.Println(sl5[len(sl5)-1])
 	// 最初と最後以外の要素を取得
 	fmt.Println(sl5[1 : len(sl5)-1])
+
+	// append
+	sl6 := []int{1, 2, 3}
+	fmt.Println(sl6)
+	sl6 = append(sl6, 4)
+	fmt.Println(sl6)
+	sl6 = append(sl6, 5, 6, 7)
+	fmt.Println(sl6)
+
+	// make
+	sl7 := make([]int, 5)
+	fmt.Println(sl7)
+
+	// len
+	fmt.Println(len(sl6))
+	fmt.Println(len(sl7))
+
+	// capacity
+	fmt.Println(cap(sl6))
+	fmt.Println(cap(sl7))
+
+	sl8 := make([]int, 5, 10)
+	fmt.Println(sl8)
+	fmt.Println(len(sl8))
+	fmt.Println(cap(sl8))
+	sl8 = append(sl8, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+	fmt.Println(sl8)
+	fmt.Println(len(sl8))
+	fmt.Println(cap(sl8))
 }

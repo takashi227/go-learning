@@ -96,4 +96,20 @@ func main() {
 	for i := 0; i < len(sl13); i++ {
 		fmt.Println(sl13[i])
 	}
+
+	// 可変長引数
+	fmt.Println(Sum(1, 2, 3))
+	fmt.Println(Sum(1, 2, 3, 4, 5, 6, 7, 8, 9, 10))
+	fmt.Println(Sum())
+
+	sl14 := []int{1, 2, 3}
+	fmt.Println(Sum(sl14...))
+}
+
+func Sum(s ...int) int {
+	n := 0
+	for _, v := range s {
+		n += v
+	}
+	return n
 }

@@ -65,4 +65,23 @@ func main() {
 	fmt.Println(sl8)
 	fmt.Println(len(sl8))
 	fmt.Println(cap(sl8))
+
+	// copy
+	sl9 := []int{1, 2, 3}
+	sl10 := sl9
+
+	// スライスは参照型なので、sl9とsl10は同じメモリを参照している
+	sl10[0] = 100
+	fmt.Println(sl9)
+	fmt.Println(sl10)
+
+	sl11 := []int{1, 2, 3, 4, 5}
+	sl12 := make([]int, 5)
+	fmt.Println(sl12)
+
+	// copy関数を使って、sl11の要素をsl12にコピーする
+	// 戻り値はコピーされた要素数
+	n := copy(sl12, sl11)
+
+	fmt.Println(n, sl12)
 }

@@ -84,4 +84,16 @@ func main() {
 	n := copy(sl12, sl11)
 
 	fmt.Println(n, sl12)
+
+	// for
+	sl13 := []string{"A", "B", "C"}
+	fmt.Println(sl13)
+
+	for _, v := range sl13 {
+		fmt.Println(v)
+	}
+
+	for i := 0; i < len(sl13); i++ {
+		fmt.Println(sl13[i])
+	}
 }

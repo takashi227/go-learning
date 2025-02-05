@@ -45,4 +45,14 @@ func main() {
 
 	// 要素数
 	fmt.Println(len(m4))
+
+	// for文による繰り返し処理
+	m5 := map[string]int{
+		"Apple":  100,
+		"Banana": 200,
+		"Cherry": 300,
+	}
+	for k, v := range m5 {
+		fmt.Println(k, v)
+	}
 }

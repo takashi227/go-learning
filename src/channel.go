@@ -92,6 +92,65 @@ func main() {
 	for i6 := range ch6 {
 		fmt.Println(i6)
 	}
+
+	// select
+	ch7 := make(chan int, 2)
+	ch8 := make(chan string, 2)
+
+	ch8 <- "A"
+	ch7 <- 1
+	ch8 <- "B"
+	ch7 <- 2
+
+	// v1 := <-ch7
+	// v2 := <-ch8
+	// fmt.Println(v1)
+	// fmt.Println(v2)
+
+	select {
+	case v1 := <-ch7:
+		fmt.Println(v1 + 1000)
+	case v2 := <-ch8:
+		fmt.Println(v2 + "!!!")
+	default:
+		fmt.Println("どちらでもない")
+	}
+
+	ch9 := make(chan int)
+	ch10 := make(chan int)
+	ch11 := make(chan int)
+
+	go func() {
+		for {
+			i9 := <-ch9
+			ch10 <- i9 * 2
+		}
+	}()
+
+	go func() {
+		for {
+			i10 := <-ch10
+			ch11 <- i10 - 1
+		}
+	}()
+
+	n := 0
+L:
+	for {
+		select {
+		case ch9 <- n:
+			n++
+		case i11 := <-ch11:
+			fmt.Println("recieved", i11)
+		default:
+			if n > 100 {
+				break L
+			}
+		}
+		// if n > 100 {
+		// 	break
+		// }
+	}
 }
 
 func reciever(name string, ch chan int) {

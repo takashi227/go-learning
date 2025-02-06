@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // channel
 // 複数のゴルーチン間でデータの受け渡しを行うためのデータ構造
@@ -52,4 +55,42 @@ func main() {
 	ch3 <- 4
 	ch3 <- 5
 	ch3 <- 6 // デッドロック
+
+	// チャネルのクローズ
+	ch4 := make(chan int, 2)
+	close(ch4)
+
+	// 閉じたチャネルにはデータを送信できない
+	// ch4 <- 1
+	// 閉じたチャネルからデータを受信できる？
+	// fmt.Println(<-ch4)
+
+	// 閉じたチャネルからデータを受信するとfalseになる
+	// チャネルが空でクローズ状態だとfalseになる
+	i, ok := <-ch4
+	fmt.Println(i, ok)
+
+	ch5 := make(chan int, 2)
+	go reciever("1.goroutin", ch5)
+	go reciever("2.goroutin", ch5)
+	go reciever("3.goroutin", ch5)
+
+	i5 := 0
+	for i5 < 100 {
+		ch5 <- i5
+		i5++
+	}
+	close(ch5)
+	time.Sleep(3 * time.Second)
+}
+
+func reciever(name string, ch chan int) {
+	for {
+		i6, ok := <-ch
+		if !ok {
+			break
+		}
+		fmt.Println(name, i6)
+	}
+	fmt.Println(name + " is done.")
 }

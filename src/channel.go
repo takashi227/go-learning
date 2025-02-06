@@ -82,6 +82,16 @@ func main() {
 	}
 	close(ch5)
 	time.Sleep(3 * time.Second)
+
+	// for
+	ch6 := make(chan int, 10)
+	ch6 <- 1
+	ch6 <- 2
+	ch6 <- 3
+	close(ch6) // for文でrangeを使う場合はクローズする必要がある
+	for i6 := range ch6 {
+		fmt.Println(i6)
+	}
 }
 
 func reciever(name string, ch chan int) {
